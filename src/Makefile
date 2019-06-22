@@ -5,49 +5,60 @@
 PATH_TO_GSL=/opt/apps/gsl/2.5-gcc-5.4.0
 
 CC=gcc
-CFLAGS= -std=c99 -c -fPIC -I./
-LDFLAGS= -lm -shared
+FT=gfortran
+COM_FLAGS= -c -I./ -fPIC
+
+CFLAGS= $(COM_FLAGS) -std=c99 
 CFLAGS+= -I$(PATH_TO_GSL)/include
-LDFLAGS+= $(PATH_TO_GSL)/lib/libgsl.a
-LDFLAGS+= $(PATH_TO_GSL)/lib/libgslcblas.a
+
+FTFLAGS= $(COM_FLAGS) -ffree-line-length-none
+
+LDFLAGS= -I./ -lm -shared
+LDFLAGS+= -I$(PATH_TO_GSL)/include
+LDFLAGS+= $(PATH_TO_GSL)/lib64/libgsl.a
+LDFLAGS+= $(PATH_TO_GSL)/lib64/libgslcblas.a
 
 #LDFLAGS=-g -L../../../build-gcc-5.4.0 -lopper -lm
 
-SOURCES=region1.c \
-region2.c \
-region3.c \
-region4.c \
-steam_ph.c \
-steam.c \
-backwards.c \
-b23.c \
-common.c \
-derivs.c \
-zeroin.c \
-steam_ps.c \
-solver2.c \
-steam_pT.c \
-steam_pu.c \
-steam_Ts.c \
-steam_Tx.c \
-surftens.c \
-bounds.c \
-steam_pv.c \
-viscosity.c \
-thcond.c 
+OBJ=region1.o \
+region2.o \
+region3.o \
+region4.o \
+steam_ph.o \
+steam.o \
+backwards.o \
+b23.o \
+common.o \
+derivs.o \
+zeroin.o \
+steam_ps.o \
+solver2.o \
+steam_pT.o \
+steam_pu.o \
+steam_Ts.o \
+steam_Tx.o \
+surftens.o \
+bounds.o \
+steam_pv.o \
+viscosity.o \
+thcond.o \
+interface_f2008.o \
+freesteam_interface.o
 
-OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=libfreesteam.so
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(OBJ) $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+$(EXECUTABLE): $(OBJ) 
+	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
-.c.o:
+%.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
+%.o: %.f08
+	$(FT) $(FTFLAGS) $< -o $@
 
 clean:
 	rm -f *.o
+	rm -f *.mod
 	rm -f $(EXECUTABLE)
