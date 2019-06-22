@@ -1,11 +1,9 @@
 /*
-This is a simple example of a C program that calculates using steam properties
+This is a simple example of a C program that use steam properties
 from freesteam.
 
-It demonstrates use of a few of the basic capabilities of freesteam. It
-calculates the rise in temperature seen in isentropic compression of a sample
-of steam initially at 1 bar, 400 K, to a final pressure of 10 bar. It also
-calculates the saturation temperature for steam at that final pressure.
+Compilation:
+gcc C_usage.c -I../src ../src/libfreesteam.so
 */
 
 #include <steam_ps.h>
@@ -21,15 +19,14 @@ int main(void){
 		" 1 bar, 400 K, to a final pressure of 10 bar. It also calculates"
 		" the saturation temperature for steam at that final pressure.\n\n"
 	);
-
-	double T = 400.; /* in Kelvin! */
-	double p = 1e5; /* = 1 bar */
-
-	fprintf(stderr,"Initial temperature = %f K, pressure = %f bar\n", T, p/1e5);
-
+    
+    double T = 400.; /* in Kelvin! */
+    double p = 1e5; /* = 1 bar */
+    fprintf(stderr,"Initial temperature = %f K, pressure = %f bar\n", T, p/1e5);
+    
 	/* set a steam state of 1 bar, 400 K */
-	SteamState S = freesteam_set_pT(1e5, 400);
-
+    SteamState S = freesteam_set_pT(p, T);
+    
 	double s = freesteam_s(S);
 	fprintf(stderr,"Entropy at initial state is %f kJ/kgK\n",s/1e3);
 
