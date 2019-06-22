@@ -1,3 +1,7 @@
+This Repository get the FreeSteam code and remove the GUI and python dependencies, so it can be compiled with a simple makefile and easy to link in your application.
+
+It also contains an interface module for usage in Fortran codes
+
 Original project
 ================
 
