@@ -1,3 +1,4 @@
 *.o
+*.mod
 *.so
 COMMIT_MSG

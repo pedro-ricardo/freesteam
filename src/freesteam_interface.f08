@@ -47,6 +47,34 @@ module freesteam_interface
         real(c_double), intent(in), value:: T, P
     end function freesteam_TP_v
     ! ------
+    function freesteam_Tx_h(T,x) result(val) bind(C,name='freesteam_Tx_h')
+        import:: c_double
+        implicit none
+        real(c_double):: val
+        real(c_double), intent(in), value:: T, x
+    end function freesteam_Tx_h
+    ! ------
+    function freesteam_Tx_s(T,x) result(val) bind(C,name='freesteam_Tx_s')
+        import:: c_double
+        implicit none
+        real(c_double):: val
+        real(c_double), intent(in), value:: T, x
+    end function freesteam_Tx_s
+    ! ------
+    function freesteam_Tx_u(T,x) result(val) bind(C,name='freesteam_Tx_u')
+        import:: c_double
+        implicit none
+        real(c_double):: val
+        real(c_double), intent(in), value:: T, x
+    end function freesteam_Tx_u
+    ! ------
+    function freesteam_Tx_v(T,x) result(val) bind(C,name='freesteam_Tx_v')
+        import:: c_double
+        implicit none
+        real(c_double):: val
+        real(c_double), intent(in), value:: T, x
+    end function freesteam_Tx_v
+    ! ------
     function freesteam_Ps_T(P,s) result(val) bind(C,name='freesteam_Ps_T')
         import:: c_double
         implicit none
