@@ -15,8 +15,8 @@ FCFLAGS= $(COM_FLAGS) -ffree-line-length-none
 
 LDFLAGS= -I./ -lm -shared
 LDFLAGS+= -I$(PATH_TO_GSL)/include
-LDFLAGS+= $(PATH_TO_GSL)/lib64/libgsl.a
-LDFLAGS+= $(PATH_TO_GSL)/lib64/libgslcblas.a
+LDFLAGS+= $(PATH_TO_GSL)/lib/libgsl.a
+LDFLAGS+= $(PATH_TO_GSL)/lib/libgslcblas.a
 
 #LDFLAGS=-g -L../../../build-gcc-5.4.0 -lopper -lm
 
