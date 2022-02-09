@@ -2,7 +2,7 @@
 #					 
 
 #Dependency path:
-PATH_TO_GSL=/opt/apps/gsl/2.5-gcc-5.4.0
+PATH_TO_GSL?=/opt/apps/gsl/2.5-gcc-5.4.0
 
 CC=gcc
 FT=gfortran
