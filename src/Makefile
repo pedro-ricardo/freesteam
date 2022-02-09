@@ -4,14 +4,14 @@
 #Dependency path:
 PATH_TO_GSL?=/opt/apps/gsl/2.5-gcc-5.4.0
 
-CC=gcc
-FT=gfortran
+CC?=gcc
+FC?=gfortran
 COM_FLAGS= -c -I./ -fPIC
 
 CFLAGS= $(COM_FLAGS) -std=c99 
 CFLAGS+= -I$(PATH_TO_GSL)/include
 
-FTFLAGS= $(COM_FLAGS) -ffree-line-length-none
+FCFLAGS= $(COM_FLAGS) -ffree-line-length-none
 
 LDFLAGS= -I./ -lm -shared
 LDFLAGS+= -I$(PATH_TO_GSL)/include
@@ -56,7 +56,7 @@ $(EXECUTABLE): $(OBJ)
 	$(CC) $(CFLAGS) $< -o $@
 
 %.o: %.f08
-	$(FT) $(FTFLAGS) $< -o $@
+	$(FC) $(FCFLAGS) $< -o $@
 
 clean:
 	rm -f *.o
